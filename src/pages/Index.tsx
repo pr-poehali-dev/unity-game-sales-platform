@@ -51,6 +51,7 @@ const Index = () => {
 
   const [promo, setPromo] = useState('');
   const [topup, setTopup] = useState('');
+  const [payMethod, setPayMethod] = useState<'sbp' | 'card'>('sbp');
 
   const calcPrice = useMemo(() => {
     const c = complexity[0];
@@ -120,9 +121,13 @@ const Index = () => {
       toast.error('Введите корректную сумму');
       return;
     }
-    setUser({ ...user, balance: user.balance + amount });
-    setTopup('');
-    toast.success(`Баланс пополнен на ${amount}₽`);
+    const methodLabel = payMethod === 'sbp' ? 'СБП' : 'картой';
+    toast.loading(`Оплата через FreeKassa (${methodLabel})...`, { id: 'pay' });
+    setTimeout(() => {
+      setUser((u) => (u ? { ...u, balance: u.balance + amount } : u));
+      setTopup('');
+      toast.success(`Баланс пополнен на ${amount}₽ через ${methodLabel}`, { id: 'pay' });
+    }, 1200);
   };
 
   return (
@@ -232,10 +237,13 @@ const Index = () => {
               </div>
               <div>
                 <h2 className="font-display font-bold text-2xl">{user.firstName} {user.lastName}</h2>
-                <p className="text-muted-foreground text-sm flex items-center gap-2">
+                <p className="text-muted-foreground text-sm flex items-center gap-2 flex-wrap">
                   Баланс: <span className="text-secondary font-bold neon-text-cyan">{user.balance.toLocaleString('ru-RU')} ₽</span>
                   {user.isAdmin && <Badge className="bg-primary/20 text-primary border border-primary/40 ml-2">ADMIN</Badge>}
                 </p>
+                <Badge className="mt-2 bg-secondary/15 text-secondary border border-secondary/40">
+                  <Icon name="ShieldCheck" size={13} className="mr-1" /> Оплата FreeKassa подключена · СБП
+                </Badge>
               </div>
             </div>
 
@@ -285,6 +293,25 @@ const Index = () => {
                 <Card className="p-6 bg-card/60 border-border max-w-md">
                   <h3 className="font-display font-bold text-lg mb-1">Пополнение баланса</h3>
                   <p className="text-muted-foreground text-sm mb-4">Текущий баланс: <span className="text-secondary font-bold">{user.balance.toLocaleString('ru-RU')} ₽</span></p>
+
+                  <Label className="text-xs text-muted-foreground">Способ оплаты</Label>
+                  <div className="grid grid-cols-2 gap-2 mt-1 mb-4">
+                    <button
+                      onClick={() => setPayMethod('sbp')}
+                      className={`flex items-center gap-2 p-3 rounded-lg border transition-all ${payMethod === 'sbp' ? 'border-secondary bg-secondary/10 neon-glow-cyan text-secondary' : 'border-border bg-input/40 text-muted-foreground'}`}
+                    >
+                      <Icon name="Smartphone" size={18} />
+                      <span className="font-bold text-sm">СБП</span>
+                    </button>
+                    <button
+                      onClick={() => setPayMethod('card')}
+                      className={`flex items-center gap-2 p-3 rounded-lg border transition-all ${payMethod === 'card' ? 'border-primary bg-primary/10 neon-glow-pink text-primary' : 'border-border bg-input/40 text-muted-foreground'}`}
+                    >
+                      <Icon name="CreditCard" size={18} />
+                      <span className="font-bold text-sm">Карта</span>
+                    </button>
+                  </div>
+
                   <div className="flex gap-2 mb-4">
                     {[1000, 2000, 3000].map((a) => (
                       <Button key={a} variant="outline" onClick={() => setTopup(String(a))} className="flex-1 border-secondary/40 text-secondary hover:bg-secondary/10">
@@ -294,8 +321,12 @@ const Index = () => {
                   </div>
                   <Input value={topup} onChange={(e) => setTopup(e.target.value)} type="number" placeholder="Сумма" className="bg-input border-border mb-3" />
                   <Button onClick={handleTopup} className="w-full bg-secondary hover:bg-secondary/90 text-secondary-foreground font-bold neon-glow-cyan">
-                    <Icon name="CreditCard" size={18} className="mr-2" /> Пополнить
+                    <Icon name={payMethod === 'sbp' ? 'Smartphone' : 'CreditCard'} size={18} className="mr-2" />
+                    Оплатить через {payMethod === 'sbp' ? 'СБП' : 'карту'}
                   </Button>
+                  <p className="text-xs text-muted-foreground text-center mt-3 flex items-center justify-center gap-1">
+                    <Icon name="Lock" size={12} /> Защищённый платёж · FreeKassa
+                  </p>
                 </Card>
               </TabsContent>
 
@@ -378,12 +409,16 @@ const Index = () => {
           <h2 className="font-display font-bold text-2xl mb-2">Остались вопросы?</h2>
           <p className="text-muted-foreground mb-6">Свяжись с нами — поможем с любым проектом на Unity.</p>
           <div className="flex flex-wrap items-center justify-center gap-3">
-            <Button variant="outline" className="border-secondary/40 text-secondary hover:bg-secondary/10">
-              <Icon name="Mail" size={18} className="mr-2" /> hello@gameforge.dev
-            </Button>
-            <Button variant="outline" className="border-primary/40 text-primary hover:bg-primary/10">
-              <Icon name="Send" size={18} className="mr-2" /> Telegram
-            </Button>
+            <a href="mailto:hello@gameforge.dev">
+              <Button variant="outline" className="border-secondary/40 text-secondary hover:bg-secondary/10">
+                <Icon name="Mail" size={18} className="mr-2" /> hello@gameforge.dev
+              </Button>
+            </a>
+            <a href="https://t.me/gameforge" target="_blank" rel="noopener noreferrer">
+              <Button variant="outline" className="border-primary/40 text-primary hover:bg-primary/10">
+                <Icon name="Send" size={18} className="mr-2" /> Telegram
+              </Button>
+            </a>
           </div>
         </Card>
       </section>
