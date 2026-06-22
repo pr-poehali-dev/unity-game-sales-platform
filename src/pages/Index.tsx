@@ -1,4 +1,4 @@
-import { useState, useMemo } from 'react';
+import { useState, useMemo, useEffect, useRef } from 'react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
@@ -37,6 +37,65 @@ const PROMO_CODES: Record<string, { type: 'admin' | 'balance'; value: number; la
   forge500: { type: 'balance', value: 500, label: '+500₽ на баланс' },
 };
 
+interface LiveActivity {
+  id: number;
+  avatar: string;
+  name: string;
+  action: string;
+  game: string;
+  price: number;
+  ago: string;
+}
+
+const FAKE_NAMES = [
+  'Артём К.', 'Дмитрий Л.', 'Алина В.', 'Максим Р.', 'Кирилл Н.',
+  'Ольга Т.', 'Иван С.', 'Виктория М.', 'Егор Б.', 'Полина Ф.',
+  'Никита Д.', 'Анастасия Ш.', 'Роман З.', 'Валерия Г.', 'Антон Х.',
+];
+
+const FAKE_GAMES = [
+  { title: 'Зомби-апокалипсис', desc: 'Выживалка от первого лица, открытый мир, крафт и орды зомби' },
+  { title: 'Космический шутер', desc: 'Аркадный shoot-em-up в стиле ретро, несколько уровней и боссы' },
+  { title: 'Средневековый RPG', desc: 'Ролевая игра с прокачкой героя, диалогами и несколькими концовками' },
+  { title: 'Гоночный симулятор', desc: 'Реалистичная физика машин, трассы и онлайн-таблица рекордов' },
+  { title: 'Платформер-головоломка', desc: 'Уровни с ловушками, телепортами и механикой перемотки времени' },
+  { title: 'Тауэр дефенс', desc: 'Строй башни, прокачивай юниты, отбивай волны врагов' },
+  { title: 'Хоррор-квест', desc: 'Психологический хоррор от первого лица с нелинейным сюжетом' },
+  { title: 'Пиксельная ферма', desc: 'Симулятор фермы с соседями, крафтом и сезонными событиями' },
+  { title: 'Файтинг 2D', desc: 'Файтинг с уникальными персонажами, суперударами и онлайн-режимом' },
+  { title: 'Стратегия в реальном времени', desc: 'Строй базу, собирай армию и захватывай карту' },
+  { title: 'Киберпанк-экшен', desc: 'Хакерские способности, паркур, стрельба в неоновом городе' },
+  { title: 'Карточная RPG', desc: 'Сбор колоды, случайные события, рогалик на картах' },
+];
+
+const AVATARS = ['🎮', '👾', '🕹️', '🎯', '🚀', '⚡', '🔥', '💎', '🏆', '🌟', '👻', '🤖'];
+
+function randomFrom<T>(arr: T[]): T {
+  return arr[Math.floor(Math.random() * arr.length)];
+}
+
+function generateActivity(): LiveActivity {
+  const game = randomFrom(FAKE_GAMES);
+  const price = Math.round((1000 + Math.random() * 2000) / 100) * 100;
+  return {
+    id: Date.now() + Math.random(),
+    avatar: randomFrom(AVATARS),
+    name: randomFrom(FAKE_NAMES),
+    action: randomFrom(['оставил заявку на', 'заказал игру', 'хочет разработку']),
+    game: game.title,
+    price,
+    ago: 'только что',
+  };
+}
+
+const INITIAL_ACTIVITIES: LiveActivity[] = [
+  { id: 1, avatar: '🎮', name: 'Артём К.', action: 'заказал игру', game: 'Зомби-апокалипсис', price: 2800, ago: '5 мин назад' },
+  { id: 2, avatar: '👾', name: 'Алина В.', action: 'оставил заявку на', game: 'Киберпанк-экшен', price: 3000, ago: '12 мин назад' },
+  { id: 3, avatar: '🚀', name: 'Максим Р.', action: 'хочет разработку', game: 'Космический шутер', price: 1500, ago: '28 мин назад' },
+  { id: 4, avatar: '⚡', name: 'Кирилл Н.', action: 'заказал игру', game: 'Тауэр дефенс', price: 1200, ago: '34 мин назад' },
+  { id: 5, avatar: '🔥', name: 'Виктория М.', action: 'оставил заявку на', game: 'Хоррор-квест', price: 2500, ago: '51 мин назад' },
+];
+
 const Index = () => {
   const [user, setUser] = useState<User | null>(null);
   const [requests, setRequests] = useState<GameRequest[]>([]);
@@ -52,6 +111,19 @@ const Index = () => {
   const [promo, setPromo] = useState('');
   const [topup, setTopup] = useState('');
   const [payMethod, setPayMethod] = useState<'sbp' | 'card'>('sbp');
+  const [activities, setActivities] = useState<LiveActivity[]>(INITIAL_ACTIVITIES);
+  const [newActivity, setNewActivity] = useState<LiveActivity | null>(null);
+  const timerRef = useRef<ReturnType<typeof setInterval> | null>(null);
+
+  useEffect(() => {
+    timerRef.current = setInterval(() => {
+      const activity = generateActivity();
+      setNewActivity(activity);
+      setActivities((prev) => [activity, ...prev.slice(0, 9)]);
+      setTimeout(() => setNewActivity(null), 4000);
+    }, 120000);
+    return () => { if (timerRef.current) clearInterval(timerRef.current); };
+  }, []);
 
   const calcPrice = useMemo(() => {
     const c = complexity[0];
@@ -204,6 +276,53 @@ const Index = () => {
             <p className="text-muted-foreground text-sm">{f.text}</p>
           </Card>
         ))}
+      </section>
+
+      {/* Live Activity Feed */}
+      <section className="container pb-10">
+        <div className="flex items-center justify-between mb-4">
+          <h2 className="font-display font-bold text-xl flex items-center gap-2">
+            <span className="relative flex h-3 w-3">
+              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-secondary opacity-75"></span>
+              <span className="relative inline-flex rounded-full h-3 w-3 bg-secondary"></span>
+            </span>
+            Активность прямо сейчас
+          </h2>
+          <Badge className="bg-secondary/15 text-secondary border border-secondary/30 text-xs">
+            {activities.length} заявок сегодня
+          </Badge>
+        </div>
+
+        {newActivity && (
+          <div className="mb-3 p-3 rounded-xl border border-secondary/60 bg-secondary/10 neon-glow-cyan animate-fade-in flex items-center gap-3">
+            <span className="text-2xl">{newActivity.avatar}</span>
+            <div className="flex-1 min-w-0">
+              <span className="font-bold text-secondary">{newActivity.name}</span>
+              <span className="text-foreground"> {newActivity.action} </span>
+              <span className="font-bold">«{newActivity.game}»</span>
+            </div>
+            <span className="font-display font-black text-primary text-sm whitespace-nowrap">{newActivity.price.toLocaleString('ru-RU')} ₽</span>
+          </div>
+        )}
+
+        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-3">
+          {activities.slice(0, 6).map((a) => (
+            <div key={a.id} className="flex items-center gap-3 p-3 rounded-xl bg-card/50 border border-border hover:border-border/80 transition-all">
+              <div className="w-10 h-10 rounded-xl bg-muted flex items-center justify-center text-xl flex-shrink-0">
+                {a.avatar}
+              </div>
+              <div className="flex-1 min-w-0">
+                <div className="flex items-center gap-1 flex-wrap">
+                  <span className="font-bold text-sm">{a.name}</span>
+                  <span className="text-muted-foreground text-xs">{a.action}</span>
+                </div>
+                <p className="text-xs text-foreground/80 truncate font-medium">«{a.game}»</p>
+                <p className="text-xs text-muted-foreground">{a.ago}</p>
+              </div>
+              <span className="font-display font-black text-xs text-secondary whitespace-nowrap">{a.price.toLocaleString('ru-RU')} ₽</span>
+            </div>
+          ))}
+        </div>
       </section>
 
       <section id="account" className="container py-12">
