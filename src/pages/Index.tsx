@@ -120,12 +120,68 @@ const INITIAL_ACTIVITIES: LiveActivity[] = [
 ];
 
 const FRIDE_TXS: FrideTx[] = [
-  { id: 'FRD-8841', type: 'in', amount: 3000, from: 'Давид Оганесян', method: 'СБП · кошелёк 172012', status: 'completed', date: '24.06.2026' },
-  { id: 'FRD-8792', type: 'out', amount: 1500, from: 'Давид Оганесян', method: 'Fride вывод · код 0271492', status: 'completed', date: '22.06.2026' },
-  { id: 'FRD-8731', type: 'in', amount: 2000, from: 'Давид Оганесян', method: 'СБП · кошелёк 172012', status: 'completed', date: '20.06.2026' },
-  { id: 'FRD-8680', type: 'out', amount: 2800, from: 'Давид Оганесян', method: 'Fride вывод · код 0271492', status: 'completed', date: '18.06.2026' },
-  { id: 'FRD-8614', type: 'in', amount: 3000, from: 'Давид Оганесян', method: 'СБП · кошелёк 172012', status: 'completed', date: '15.06.2026' },
-  { id: 'FRD-8590', type: 'out', amount: 1000, from: 'Давид Оганесян', method: 'Fride вывод · код 0271492', status: 'pending', date: '14.06.2026' },
+  { id: 'FRD-8841', type: 'in',  amount: 3000, from: 'Давид Оганесян', method: 'СБП · кошелёк 172012',        status: 'completed', date: '24.06.2026' },
+  { id: 'FRD-8835', type: 'out', amount: 1200, from: 'Давид Оганесян', method: 'Fride вывод · код 0271492',   status: 'completed', date: '24.06.2026' },
+  { id: 'FRD-8820', type: 'in',  amount: 2500, from: 'Давид Оганесян', method: 'СБП · кошелёк 172012',        status: 'completed', date: '23.06.2026' },
+  { id: 'FRD-8814', type: 'out', amount: 900,  from: 'Давид Оганесян', method: 'Fride вывод · код 0271492',   status: 'completed', date: '23.06.2026' },
+  { id: 'FRD-8807', type: 'in',  amount: 1800, from: 'Давид Оганесян', method: 'Карта · кошелёк 172012',      status: 'completed', date: '22.06.2026' },
+  { id: 'FRD-8792', type: 'out', amount: 1500, from: 'Давид Оганесян', method: 'Fride вывод · код 0271492',   status: 'completed', date: '22.06.2026' },
+  { id: 'FRD-8780', type: 'in',  amount: 3000, from: 'Давид Оганесян', method: 'СБП · кошелёк 172012',        status: 'completed', date: '21.06.2026' },
+  { id: 'FRD-8771', type: 'out', amount: 2200, from: 'Давид Оганесян', method: 'Fride вывод · код 0271492',   status: 'completed', date: '21.06.2026' },
+  { id: 'FRD-8763', type: 'in',  amount: 1500, from: 'Давид Оганесян', method: 'СБП · кошелёк 172012',        status: 'completed', date: '20.06.2026' },
+  { id: 'FRD-8731', type: 'out', amount: 2000, from: 'Давид Оганесян', method: 'Fride вывод · код 0271492',   status: 'completed', date: '20.06.2026' },
+  { id: 'FRD-8719', type: 'in',  amount: 2800, from: 'Давид Оганесян', method: 'Карта · кошелёк 172012',      status: 'completed', date: '19.06.2026' },
+  { id: 'FRD-8710', type: 'out', amount: 1100, from: 'Давид Оганесян', method: 'Fride вывод · код 0271492',   status: 'completed', date: '19.06.2026' },
+  { id: 'FRD-8698', type: 'in',  amount: 1000, from: 'Давид Оганесян', method: 'СБП · кошелёк 172012',        status: 'completed', date: '18.06.2026' },
+  { id: 'FRD-8680', type: 'out', amount: 2800, from: 'Давид Оганесян', method: 'Fride вывод · код 0271492',   status: 'completed', date: '18.06.2026' },
+  { id: 'FRD-8667', type: 'in',  amount: 3000, from: 'Давид Оганесян', method: 'СБП · кошелёк 172012',        status: 'completed', date: '17.06.2026' },
+  { id: 'FRD-8655', type: 'out', amount: 700,  from: 'Давид Оганесян', method: 'Fride вывод · код 0271492',   status: 'completed', date: '17.06.2026' },
+  { id: 'FRD-8644', type: 'in',  amount: 2100, from: 'Давид Оганесян', method: 'Карта · кошелёк 172012',      status: 'completed', date: '16.06.2026' },
+  { id: 'FRD-8630', type: 'out', amount: 1600, from: 'Давид Оганесян', method: 'Fride вывод · код 0271492',   status: 'completed', date: '16.06.2026' },
+  { id: 'FRD-8619', type: 'in',  amount: 2700, from: 'Давид Оганесян', method: 'СБП · кошелёк 172012',        status: 'completed', date: '15.06.2026' },
+  { id: 'FRD-8614', type: 'out', amount: 3000, from: 'Давид Оганесян', method: 'Fride вывод · код 0271492',   status: 'completed', date: '15.06.2026' },
+  { id: 'FRD-8601', type: 'in',  amount: 1300, from: 'Давид Оганесян', method: 'СБП · кошелёк 172012',        status: 'completed', date: '14.06.2026' },
+  { id: 'FRD-8590', type: 'out', amount: 1000, from: 'Давид Оганесян', method: 'Fride вывод · код 0271492',   status: 'completed', date: '14.06.2026' },
+  { id: 'FRD-8577', type: 'in',  amount: 2400, from: 'Давид Оганесян', method: 'Карта · кошелёк 172012',      status: 'completed', date: '13.06.2026' },
+  { id: 'FRD-8562', type: 'out', amount: 1800, from: 'Давид Оганесян', method: 'Fride вывод · код 0271492',   status: 'completed', date: '13.06.2026' },
+  { id: 'FRD-8549', type: 'in',  amount: 1700, from: 'Давид Оганесян', method: 'СБП · кошелёк 172012',        status: 'completed', date: '12.06.2026' },
+  { id: 'FRD-8537', type: 'out', amount: 2500, from: 'Давид Оганесян', method: 'Fride вывод · код 0271492',   status: 'completed', date: '12.06.2026' },
+  { id: 'FRD-8524', type: 'in',  amount: 3000, from: 'Давид Оганесян', method: 'СБП · кошелёк 172012',        status: 'completed', date: '11.06.2026' },
+  { id: 'FRD-8511', type: 'out', amount: 900,  from: 'Давид Оганесян', method: 'Fride вывод · код 0271492',   status: 'completed', date: '11.06.2026' },
+  { id: 'FRD-8499', type: 'in',  amount: 2200, from: 'Давид Оганесян', method: 'Карта · кошелёк 172012',      status: 'completed', date: '10.06.2026' },
+  { id: 'FRD-8487', type: 'out', amount: 1400, from: 'Давид Оганесян', method: 'Fride вывод · код 0271492',   status: 'completed', date: '10.06.2026' },
+  { id: 'FRD-8474', type: 'in',  amount: 1900, from: 'Давид Оганесян', method: 'СБП · кошелёк 172012',        status: 'completed', date: '09.06.2026' },
+  { id: 'FRD-8461', type: 'out', amount: 2100, from: 'Давид Оганесян', method: 'Fride вывод · код 0271492',   status: 'completed', date: '09.06.2026' },
+  { id: 'FRD-8449', type: 'in',  amount: 2600, from: 'Давид Оганесян', method: 'СБП · кошелёк 172012',        status: 'completed', date: '08.06.2026' },
+  { id: 'FRD-8436', type: 'out', amount: 1700, from: 'Давид Оганесян', method: 'Fride вывод · код 0271492',   status: 'completed', date: '08.06.2026' },
+  { id: 'FRD-8423', type: 'in',  amount: 1100, from: 'Давид Оганесян', method: 'Карта · кошелёк 172012',      status: 'completed', date: '07.06.2026' },
+  { id: 'FRD-8411', type: 'out', amount: 800,  from: 'Давид Оганесян', method: 'Fride вывод · код 0271492',   status: 'completed', date: '07.06.2026' },
+  { id: 'FRD-8399', type: 'in',  amount: 2900, from: 'Давид Оганесян', method: 'СБП · кошелёк 172012',        status: 'completed', date: '06.06.2026' },
+  { id: 'FRD-8387', type: 'out', amount: 2300, from: 'Давид Оганесян', method: 'Fride вывод · код 0271492',   status: 'completed', date: '06.06.2026' },
+  { id: 'FRD-8374', type: 'in',  amount: 1600, from: 'Давид Оганесян', method: 'СБП · кошелёк 172012',        status: 'completed', date: '05.06.2026' },
+  { id: 'FRD-8362', type: 'out', amount: 1300, from: 'Давид Оганесян', method: 'Fride вывод · код 0271492',   status: 'completed', date: '05.06.2026' },
+  { id: 'FRD-8349', type: 'in',  amount: 2000, from: 'Давид Оганесян', method: 'Карта · кошелёк 172012',      status: 'completed', date: '04.06.2026' },
+  { id: 'FRD-8337', type: 'out', amount: 1900, from: 'Давид Оганесян', method: 'Fride вывод · код 0271492',   status: 'completed', date: '04.06.2026' },
+  { id: 'FRD-8324', type: 'in',  amount: 2700, from: 'Давид Оганесян', method: 'СБП · кошелёк 172012',        status: 'completed', date: '03.06.2026' },
+  { id: 'FRD-8311', type: 'out', amount: 1000, from: 'Давид Оганесян', method: 'Fride вывод · код 0271492',   status: 'completed', date: '03.06.2026' },
+  { id: 'FRD-8299', type: 'in',  amount: 1400, from: 'Давид Оганесян', method: 'СБП · кошелёк 172012',        status: 'completed', date: '02.06.2026' },
+  { id: 'FRD-8287', type: 'out', amount: 2600, from: 'Давид Оганесян', method: 'Fride вывод · код 0271492',   status: 'completed', date: '02.06.2026' },
+  { id: 'FRD-8274', type: 'in',  amount: 3000, from: 'Давид Оганесян', method: 'Карта · кошелёк 172012',      status: 'completed', date: '01.06.2026' },
+  { id: 'FRD-8261', type: 'out', amount: 2400, from: 'Давид Оганесян', method: 'Fride вывод · код 0271492',   status: 'completed', date: '01.06.2026' },
+  { id: 'FRD-8248', type: 'in',  amount: 1800, from: 'Давид Оганесян', method: 'СБП · кошелёк 172012',        status: 'completed', date: '31.05.2026' },
+  { id: 'FRD-8235', type: 'out', amount: 1100, from: 'Давид Оганесян', method: 'Fride вывод · код 0271492',   status: 'completed', date: '31.05.2026' },
+  { id: 'FRD-8222', type: 'in',  amount: 2300, from: 'Давид Оганесян', method: 'СБП · кошелёк 172012',        status: 'completed', date: '30.05.2026' },
+  { id: 'FRD-8209', type: 'out', amount: 1700, from: 'Давид Оганесян', method: 'Fride вывод · код 0271492',   status: 'completed', date: '30.05.2026' },
+  { id: 'FRD-8196', type: 'in',  amount: 1200, from: 'Давид Оганесян', method: 'Карта · кошелёк 172012',      status: 'completed', date: '29.05.2026' },
+  { id: 'FRD-8183', type: 'out', amount: 2000, from: 'Давид Оганесян', method: 'Fride вывод · код 0271492',   status: 'completed', date: '29.05.2026' },
+  { id: 'FRD-8170', type: 'in',  amount: 2800, from: 'Давид Оганесян', method: 'СБП · кошелёк 172012',        status: 'completed', date: '28.05.2026' },
+  { id: 'FRD-8157', type: 'out', amount: 2900, from: 'Давид Оганесян', method: 'Fride вывод · код 0271492',   status: 'completed', date: '28.05.2026' },
+  { id: 'FRD-8144', type: 'in',  amount: 1500, from: 'Давид Оганесян', method: 'СБП · кошелёк 172012',        status: 'completed', date: '27.05.2026' },
+  { id: 'FRD-8131', type: 'out', amount: 1300, from: 'Давид Оганесян', method: 'Fride вывод · код 0271492',   status: 'completed', date: '27.05.2026' },
+  { id: 'FRD-8118', type: 'in',  amount: 2100, from: 'Давид Оганесян', method: 'Карта · кошелёк 172012',      status: 'completed', date: '26.05.2026' },
+  { id: 'FRD-8105', type: 'out', amount: 1800, from: 'Давид Оганесян', method: 'Fride вывод · код 0271492',   status: 'completed', date: '26.05.2026' },
+  { id: 'FRD-8092', type: 'in',  amount: 2500, from: 'Давид Оганесян', method: 'СБП · кошелёк 172012',        status: 'completed', date: '25.05.2026' },
+  { id: 'FRD-8079', type: 'out', amount: 2200, from: 'Давид Оганесян', method: 'Fride вывод · код 0271492',   status: 'completed', date: '25.05.2026' },
 ];
 
 const Index = () => {
@@ -541,12 +597,42 @@ const Index = () => {
                     <p className="text-xs text-muted-foreground mt-2">Вывод на кошелёк Fride 172012 · от Давид Оганесян</p>
                   </Card>
 
+                  {/* Stats */}
+                  <div className="grid grid-cols-3 gap-3">
+                    {(() => {
+                      const totalIn  = frideTxs.filter(t => t.type === 'in').reduce((s, t) => s + t.amount, 0);
+                      const totalOut = frideTxs.filter(t => t.type === 'out').reduce((s, t) => s + t.amount, 0);
+                      const net = totalIn - totalOut;
+                      return (
+                        <>
+                          <Card className="p-3 bg-secondary/10 border-secondary/30 text-center">
+                            <p className="text-xs text-muted-foreground mb-1">Пополнено</p>
+                            <p className="font-display font-black text-secondary text-base">{totalIn.toLocaleString('ru-RU')} ₽</p>
+                            <p className="text-xs text-muted-foreground">{frideTxs.filter(t => t.type === 'in').length} опер.</p>
+                          </Card>
+                          <Card className="p-3 bg-primary/10 border-primary/30 text-center">
+                            <p className="text-xs text-muted-foreground mb-1">Выведено</p>
+                            <p className="font-display font-black text-primary text-base">{totalOut.toLocaleString('ru-RU')} ₽</p>
+                            <p className="text-xs text-muted-foreground">{frideTxs.filter(t => t.type === 'out').length} опер.</p>
+                          </Card>
+                          <Card className={`p-3 border text-center ${net >= 0 ? 'bg-secondary/10 border-secondary/30' : 'bg-primary/10 border-primary/30'}`}>
+                            <p className="text-xs text-muted-foreground mb-1">Итого</p>
+                            <p className={`font-display font-black text-base ${net >= 0 ? 'text-secondary' : 'text-primary'}`}>{net >= 0 ? '+' : ''}{net.toLocaleString('ru-RU')} ₽</p>
+                            <p className="text-xs text-muted-foreground">{frideTxs.length} всего</p>
+                          </Card>
+                        </>
+                      );
+                    })()}
+                  </div>
+
                   {/* Transaction list */}
                   <Card className="p-5 bg-card/60 border-border">
                     <h3 className="font-display font-bold text-base mb-4 flex items-center gap-2">
-                      <Icon name="History" size={18} className="text-muted-foreground" /> История транзакций
+                      <Icon name="History" size={18} className="text-muted-foreground" />
+                      История транзакций за месяц
+                      <Badge className="ml-auto bg-muted text-muted-foreground border-border border text-xs">{frideTxs.length} шт</Badge>
                     </h3>
-                    <div className="space-y-2">
+                    <div className="space-y-2 max-h-[520px] overflow-y-auto pr-1">
                       {frideTxs.map((tx) => (
                         <div key={tx.id} className="flex items-center gap-3 p-3 rounded-lg bg-input/40 border border-border">
                           <div className={`w-9 h-9 rounded-lg flex items-center justify-center flex-shrink-0 ${tx.type === 'in' ? 'bg-secondary/15' : 'bg-primary/15'}`}>
@@ -557,7 +643,7 @@ const Index = () => {
                             <p className="text-xs text-muted-foreground truncate">{tx.from} · {tx.method}</p>
                             <p className="text-xs text-muted-foreground">{tx.date}</p>
                           </div>
-                          <div className="text-right">
+                          <div className="text-right shrink-0">
                             <p className={`font-display font-black text-sm ${tx.type === 'in' ? 'text-secondary' : 'text-primary'}`}>
                               {tx.type === 'in' ? '+' : '−'}{tx.amount.toLocaleString('ru-RU')} ₽
                             </p>
